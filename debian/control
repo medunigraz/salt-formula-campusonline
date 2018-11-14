@@ -1,0 +1,15 @@
+Source: salt-formula-campusonline
+Maintainer: Michael Fladischer <michael@fladi.at>
+Section: admin
+Priority: optional
+Build-Depends: debhelper (>= 9), salt-master, python, python-yaml
+Standards-Version: 3.9.6
+Homepage: https://github.com/medunigraz/salt-formula-campusonline
+Vcs-Browser: https://github.com/medunigraz/salt-formula-campusonline
+Vcs-Git: https://github.com/medunigraz/salt-formula-campusonline.git
+
+Package: salt-formula-campusonline
+Architecture: all
+Depends: ${misc:Depends}
+Description: CAMPUSonline salt formula
+ Install and configure CAMPUSonline components.

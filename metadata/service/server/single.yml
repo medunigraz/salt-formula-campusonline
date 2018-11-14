@@ -1,0 +1,10 @@
+applications:
+- campusonline
+classes:
+- service.campusonline.support
+parameters:
+  campusonline:
+    server:
+      enabled: true
+      bind:
+        address: 0.0.0.0

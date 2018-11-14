@@ -1,0 +1,45 @@
+{%- set osarch = salt['grains.get']('osarch') %}
+{%- load_yaml as base_defaults %}
+Debian:
+  proxy:
+    pkgs:
+      - apache2
+      - ssl-cert
+    service: apache2.service
+    config:
+      dir: /etc/apache2/sites-available
+      suffix: .conf
+    tls:
+      public: /etc/ssl/certs
+      private: /etc/ssl/private
+    modules:
+      - authz_core
+      - expires
+      - filter
+      - headers
+      - mime
+      - proxy
+      - proxy_http
+      - rewrite
+      - setenvif
+      - ssl
+      - status
+RedHat:
+  proxy:
+    pkgs:
+      - httpd
+    service: httpd.service
+    config:
+      dir: /etc/httpd/conf.d
+      suffix: .conf
+Suse:
+  proxy:
+    pkgs:
+      - apache2
+    service: apache2.service
+    config:
+      dir: /etc/apache2/vhosts.d
+      suffix: .conf
+{%- endload %}
+
+{%- set campusonline = salt['grains.filter_by'](base_defaults, merge=salt['pillar.get']('campusonline')) %}

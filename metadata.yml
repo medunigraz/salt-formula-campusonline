@@ -1,0 +1,3 @@
+name: "campusonline"
+version: "2018.1"
+source: "https://github.com/medunigraz/salt-formula-campusonline"
