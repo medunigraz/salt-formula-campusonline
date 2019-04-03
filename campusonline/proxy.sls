@@ -137,14 +137,11 @@ campusonline_{{ name }}_maintainance_dir_conf:
     - require:
       - file: campusonline_{{ name }}_maintainance_dir_home
 
-{%- if site.proxy.maintainance.keys is iterable %}
+{%- if site.proxy.maintainance.keys is defined %}
 campusonline_{{ name }}_maintainance_public_key:
   ssh_auth.present:
     - user: {{ site.proxy.maintainance.username }}
-    - names:
-      {%- for key in site.proxy.maintainance.keys %}
-      - {{ key }}
-      {%- endfor %}
+    - names: {{ site.proxy.maintainance.get('keys', []) }}
 {%- endif %}
 {%- endif %}
 
