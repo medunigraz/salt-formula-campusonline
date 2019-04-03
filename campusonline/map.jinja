@@ -24,6 +24,7 @@ Debian:
       - setenvif
       - ssl
       - status
+    group: www-data
 RedHat:
   proxy:
     pkgs:
@@ -32,6 +33,7 @@ RedHat:
     config:
       dir: /etc/httpd/conf.d
       suffix: .conf
+    group: apache
 Suse:
   proxy:
     pkgs:
@@ -40,6 +42,7 @@ Suse:
     config:
       dir: /etc/apache2/vhosts.d
       suffix: .conf
+    group: www
 {%- endload %}
 
 {%- set campusonline = salt['grains.filter_by'](base_defaults, merge=salt['pillar.get']('campusonline')) %}

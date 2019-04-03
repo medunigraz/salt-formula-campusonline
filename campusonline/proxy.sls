@@ -88,6 +88,56 @@ campusonline_{{ name }}_proxy_tls_chain:
     - service: campusonline_proxy_service
 {%- endif %}
 
+{%- if site.proxy.maintainance is defined %}
+campusonline_{{ name }}_maintainance_dir_home:
+  file.directory:
+    - name: {{ site.proxy.maintainance.directory }}
+    - user: {{ site.proxy.maintainance.username }}
+    - group: {{ campusonline.proxy.group }}
+    - dir_mode: 750
+    - file_mode: 640
+
+campusonline_{{ name }}_maintainance_dir_root:
+  file.directory:
+    - name: {{ site.proxy.maintainance.directory }}/CAMPUSonline
+    - user: {{ site.proxy.maintainance.username }}
+    - group: {{ campusonline.proxy.group }}
+    - dir_mode: 750
+    - file_mode: 640
+    - require:
+      - file: campusonline_{{ name }}_maintainance_dir_home
+
+campusonline_{{ name }}_maintainance_dir_{{ instance }}:
+  file.directory:
+    - name: {{ site.proxy.maintainance.directory }}/CAMPUSonline/{{ campusonline.proxy.instance }}
+    - user: {{ site.proxy.maintainance.username }}
+    - group: {{ campusonline.proxy.group }}
+    - dir_mode: 750
+    - file_mode: 640
+    - require:
+      - file: campusonline_{{ name }}_maintainance_dir_root
+
+campusonline_{{ name }}_maintainance_dir_scripts:
+  file.directory:
+    - name: {{ site.proxy.maintainance.directory }}/scripts
+    - user: {{ site.proxy.maintainance.username }}
+    - group: {{ campusonline.proxy.group }}
+    - dir_mode: 750
+    - file_mode: 640
+    - require:
+      - file: campusonline_{{ name }}_maintainance_dir_home
+
+campusonline_{{ name }}_maintainance_dir_conf:
+  file.directory:
+    - name: {{ site.proxy.maintainance.directory }}/CAMPUSonline/conf
+    - user: {{ site.proxy.maintainance.username }}
+    - group: {{ campusonline.proxy.group }}
+    - dir_mode: 750
+    - file_mode: 640
+    - require:
+      - file: campusonline_{{ name }}_maintainance_dir_home
+{%- endif %}
+
 {%- if grains['os_family'] == 'Debian' %}
 campusonline_{{ name }}_proxy_config_enable:
   cmd.run:
