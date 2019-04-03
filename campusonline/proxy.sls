@@ -107,7 +107,7 @@ campusonline_{{ name }}_maintainance_dir_root:
     - require:
       - file: campusonline_{{ name }}_maintainance_dir_home
 
-campusonline_{{ name }}_maintainance_dir_{{ instance }}:
+campusonline_{{ name }}_maintainance_dir_{{ campusonline.proxy.instance }}:
   file.directory:
     - name: {{ site.proxy.maintainance.directory }}/CAMPUSonline/{{ campusonline.proxy.instance }}
     - user: {{ site.proxy.maintainance.username }}
