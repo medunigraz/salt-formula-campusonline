@@ -136,6 +136,16 @@ campusonline_{{ name }}_maintainance_dir_conf:
     - file_mode: 640
     - require:
       - file: campusonline_{{ name }}_maintainance_dir_home
+
+{%- if site.proxy.maintainance.keys is iterable %}
+campusonline_{{ name }}_maintainance_public_key:
+  ssh_auth.present:
+    - user: {{ site.proxy.maintainance.username }}
+    - names:
+      {%- for key in site.proxy.maintainance.keys %}
+      - {{ key }}
+      {%- endfor %}
+{%- endif %}
 {%- endif %}
 
 {%- if grains['os_family'] == 'Debian' %}
