@@ -129,7 +129,7 @@ campusonline_{{ name }}_maintainance_dir_scripts:
 
 campusonline_{{ name }}_maintainance_dir_conf:
   file.directory:
-    - name: {{ site.proxy.maintainance.directory }}/CAMPUSonline/conf
+    - name: {{ site.proxy.maintainance.directory }}/conf
     - user: {{ site.proxy.maintainance.username }}
     - group: {{ campusonline.proxy.group }}
     - dir_mode: 750
